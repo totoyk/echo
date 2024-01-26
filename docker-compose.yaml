@@ -10,3 +10,11 @@ services:
       - "1323:1323"
     volumes:
       - ./:/app
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: prototype
