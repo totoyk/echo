@@ -11,6 +11,20 @@ services:
     volumes:
       - ./:/app
 
+  oapigen:
+    image: "openapitools/openapi-generator-cli:v6.6.0"
+    command: >
+      /bin/bash -c \
+      '
+        /usr/local/bin/docker-entrypoint.sh \
+          generate \
+            -i /workspace/spec/openapi.yml \
+            -g openapi-yaml \
+            -o /workspace/spec/.dist
+      '
+    volumes:
+      - ./:/workspace
+
   db:
     image: mysql:8.0
     ports:

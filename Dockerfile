@@ -9,5 +9,6 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . ./
+RUN go run internal/gen.go
 
 EXPOSE 1323
