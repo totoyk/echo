@@ -4,6 +4,7 @@ import "github.com/caarlos0/env/v10"
 
 type Env struct {
 	// DB
+	DBType string `env:"DB_TYPE,required" envDefault:"mysql"`
 	DBHost string `env:"DB_HOST,required" envDefault:"db"`
 	DBPort string `env:"DB_PORT,required" envDefault:"13306"`
 	DBUser string `env:"DB_USER,required" envDefault:"root"`

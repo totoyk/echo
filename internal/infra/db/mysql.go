@@ -31,15 +31,15 @@ func DBConfig() *Database {
 	return c
 }
 
-func NewConn() (*gorm.DB, error) {
+func MySQL() (*gorm.DB, error) {
 	c := DBConfig()
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", c.UserName, c.Password, c.Host, c.Port, c.DBName)
 	dsn += fmt.Sprintf("?charset=utf8mb4&parseTime=true&loc=%s", c.DBLoc)
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	dbconn, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
-	return db, nil
+	return dbconn, nil
 }
