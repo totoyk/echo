@@ -11,26 +11,13 @@ paths:
       operationId: listPets
       tags:
         - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
       responses:
         '200':
           description: A paged array of pets
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  pets:
-                    type: array
-                    items:
-                      $ref: '../schemas/pet.yml#/components/schemas/Pet'
+                $ref: '../schemas/pet.yml#/components/schemas/Pets'
         default:
           description: unexpected error
           content:

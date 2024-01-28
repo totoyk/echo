@@ -11,6 +11,25 @@ services:
     volumes:
       - ./:/app
 
+  codegen:
+    build:
+      context: .
+    command: >
+      /bin/bash -c \
+      '
+        oapi-codegen \
+          -config config/type.config.yml \
+          spec/.dist/openapi/openapi.yaml & \
+        oapi-codegen \
+          -config config/router.config.yml \
+          spec/.dist/openapi/openapi.yaml
+      '
+    depends_on:
+      oapigen:
+        condition: service_completed_successfully
+    volumes:
+      - ./:/app
+
   oapigen:
     image: "openapitools/openapi-generator-cli:v6.6.0"
     command: >
@@ -18,12 +37,12 @@ services:
       '
         /usr/local/bin/docker-entrypoint.sh \
           generate \
-            -i /workspace/spec/openapi.yml \
+            -i /app/spec/openapi.yml \
             -g openapi-yaml \
-            -o /workspace/spec/.dist
+            -o /app/spec/.dist
       '
     volumes:
-      - ./:/workspace
+      - ./:/app
 
   db:
     image: mysql:8.0

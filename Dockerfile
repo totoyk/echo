@@ -7,8 +7,9 @@ RUN curl -fLo install.sh https://raw.githubusercontent.com/cosmtrek/air/master/i
 
 COPY go.mod go.sum ./
 RUN go mod download
+RUN go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest
+RUN go install github.com/cosmtrek/air@latest
 
 COPY . ./
-RUN go run internal/gen.go
 
 EXPOSE 1323
