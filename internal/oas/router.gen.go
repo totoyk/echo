@@ -18,7 +18,7 @@ type ServerInterface interface {
 	ListPets(ctx echo.Context) error
 	// Info for a specific pet
 	// (GET /pets/{id})
-	FindPetById(ctx echo.Context, id int64) error
+	FindPetById(ctx echo.Context, id uint) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -39,7 +39,7 @@ func (w *ServerInterfaceWrapper) ListPets(ctx echo.Context) error {
 func (w *ServerInterfaceWrapper) FindPetById(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "id" -------------
-	var id int64
+	var id uint
 
 	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
 	if err != nil {

@@ -11,7 +11,7 @@ type Error struct {
 
 // Pet defines model for Pet.
 type Pet struct {
-	Id   int64   `json:"id"`
+	Id   uint    `json:"id"`
 	Name string  `json:"name"`
 	Tag  *string `json:"tag,omitempty"`
 }

@@ -9,9 +9,9 @@ type PetRepository struct {
 	Conn *gorm.DB
 }
 
-func NewPetRepository(db *gorm.DB) *PetRepository {
+func NewPetRepository(dbconn *gorm.DB) *PetRepository {
 	return &PetRepository{
-		Conn: db,
+		Conn: dbconn,
 	}
 }
 
@@ -20,7 +20,7 @@ func (r *PetRepository) FindAll() (pets []model.Pet, err error) {
 	return
 }
 
-func (r *PetRepository) FindById(id int64) (pet model.Pet, err error) {
+func (r *PetRepository) FindById(id uint) (pet model.Pet, err error) {
 	err = r.Conn.First(&pet, id).Error
 	return
 }
