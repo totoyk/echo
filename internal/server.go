@@ -10,15 +10,17 @@ import (
 
 func Run() error {
 	e := echo.New()
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	g := e.Group("/v1")
+
+	g.Use(middleware.Logger())
+	g.Use(middleware.Recover())
 
 	dbconn, err := db.NewConn()
 	if err != nil {
 		return err
 	}
 	handlers := ui.NewHandlers(dbconn)
-	oas.RegisterHandlers(e, handlers)
+	oas.RegisterHandlers(g, handlers)
 
 	e.Logger.Fatal(e.Start(":1323"))
 
