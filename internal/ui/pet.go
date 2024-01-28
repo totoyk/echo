@@ -22,9 +22,7 @@ func (h *PetHandler) ListPets(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
-	result := interfaces.NewPets(pets)
-
-	return ctx.JSON(http.StatusOK, result)
+	return ctx.JSON(http.StatusOK, interfaces.NewPets(pets))
 }
 
 // (GET /pets/{id})
@@ -33,7 +31,5 @@ func (h *PetHandler) FindPetById(ctx echo.Context, id uint) error {
 	if err != nil {
 		return err
 	}
-	result := interfaces.NewPet(pet)
-
-	return ctx.JSON(http.StatusOK, result)
+	return ctx.JSON(http.StatusOK, interfaces.NewPet(pet))
 }
