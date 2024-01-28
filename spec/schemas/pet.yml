@@ -17,3 +17,12 @@ components:
         id: 123
         name: doggie
         tag: dog
+    Pets:
+      type: object
+      required:
+        - pets
+      properties:
+        pets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pet'
