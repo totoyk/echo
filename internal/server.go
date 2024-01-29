@@ -4,8 +4,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/totoyk/trial-api-golang/internal/infra/db"
+	"github.com/totoyk/trial-api-golang/internal/interfaces"
 	"github.com/totoyk/trial-api-golang/internal/oas"
-	"github.com/totoyk/trial-api-golang/internal/ui"
 )
 
 func Run() error {
@@ -19,7 +19,7 @@ func Run() error {
 	if err != nil {
 		return err
 	}
-	handlers := ui.NewHandlers(dbconn)
+	handlers := interfaces.NewHandlers(dbconn)
 	oas.RegisterHandlers(g, handlers)
 
 	e.Logger.Fatal(e.Start(":1323"))

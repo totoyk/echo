@@ -1,4 +1,4 @@
-package interfaces
+package response
 
 import (
 	"github.com/totoyk/trial-api-golang/internal/domain/model"

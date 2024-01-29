@@ -1,4 +1,4 @@
-package ui
+package interfaces
 
 import (
 	"github.com/totoyk/trial-api-golang/internal/domain/repository"
@@ -11,11 +11,11 @@ type Handlers struct {
 }
 
 func NewHandlers(dbconn *gorm.DB) *Handlers {
-	repositories := repository.NewRepositories(dbconn)
+	// DI repository
+	petRepository := repository.NewPetRepository(dbconn)
 
+	// DI interfaces -> usecase
 	return &Handlers{
-		PetHandler: PetHandler{
-			UsecaseReceiver: usecase.NewPetInteractor(*repositories.PetRepository),
-		},
+		PetHandler: *NewPetHandler(usecase.NewPetInteractor(*petRepository)),
 	}
 }
