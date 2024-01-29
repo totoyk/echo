@@ -11,10 +11,10 @@ type Handlers struct {
 }
 
 func NewHandlers(dbconn *gorm.DB) *Handlers {
-	// DI repository
+	// DI repository <- infrastructure
 	petRepository := repository.NewPetRepository(dbconn)
 
-	// DI interfaces -> usecase
+	// DI interfaces -> usecase -> repository
 	return &Handlers{
 		PetHandler: *NewPetHandler(usecase.NewPetInteractor(*petRepository)),
 	}
