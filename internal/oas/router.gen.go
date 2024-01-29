@@ -16,9 +16,18 @@ type ServerInterface interface {
 	// List all pets
 	// (GET /pets)
 	ListPets(ctx echo.Context) error
+	// Create a pet
+	// (POST /pets)
+	CreatePets(ctx echo.Context) error
+	// Deletes a pet
+	// (DELETE /pets/{id})
+	DeletePet(ctx echo.Context, id uint) error
 	// Info for a specific pet
 	// (GET /pets/{id})
 	FindPetById(ctx echo.Context, id uint) error
+	// Update an existing pet
+	// (PUT /pets/{id})
+	UpdatePet(ctx echo.Context, id uint) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -35,6 +44,31 @@ func (w *ServerInterfaceWrapper) ListPets(ctx echo.Context) error {
 	return err
 }
 
+// CreatePets converts echo context to params.
+func (w *ServerInterfaceWrapper) CreatePets(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.CreatePets(ctx)
+	return err
+}
+
+// DeletePet converts echo context to params.
+func (w *ServerInterfaceWrapper) DeletePet(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id uint
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.DeletePet(ctx, id)
+	return err
+}
+
 // FindPetById converts echo context to params.
 func (w *ServerInterfaceWrapper) FindPetById(ctx echo.Context) error {
 	var err error
@@ -48,6 +82,22 @@ func (w *ServerInterfaceWrapper) FindPetById(ctx echo.Context) error {
 
 	// Invoke the callback with all the unmarshaled arguments
 	err = w.Handler.FindPetById(ctx, id)
+	return err
+}
+
+// UpdatePet converts echo context to params.
+func (w *ServerInterfaceWrapper) UpdatePet(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id uint
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.UpdatePet(ctx, id)
 	return err
 }
 
@@ -80,6 +130,9 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 	}
 
 	router.GET(baseURL+"/pets", wrapper.ListPets)
+	router.POST(baseURL+"/pets", wrapper.CreatePets)
+	router.DELETE(baseURL+"/pets/:id", wrapper.DeletePet)
 	router.GET(baseURL+"/pets/:id", wrapper.FindPetById)
+	router.PUT(baseURL+"/pets/:id", wrapper.UpdatePet)
 
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/totoyk/trial-api-golang/internal/interfaces/response"
+	"github.com/totoyk/trial-api-golang/internal/oas"
 	"github.com/totoyk/trial-api-golang/internal/usecase"
 )
 
@@ -22,7 +23,9 @@ func NewPetHandler(petReceiver usecase.PetReceiver) *PetHandler {
 func (h *PetHandler) ListPets(ctx echo.Context) error {
 	result, err := h.UsecaseReceiver.ListPets(ctx)
 	if err != nil {
-		return err
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
 	}
 	res := response.NewPets(result)
 	return ctx.JSON(http.StatusOK, res)
@@ -32,8 +35,55 @@ func (h *PetHandler) ListPets(ctx echo.Context) error {
 func (h *PetHandler) FindPetById(ctx echo.Context, id uint) error {
 	result, err := h.UsecaseReceiver.FindPetById(ctx, id)
 	if err != nil {
-		return err
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
 	}
 	res := response.NewPet(result)
 	return ctx.JSON(http.StatusOK, res)
+}
+
+// (POST /pets)
+func (h *PetHandler) CreatePets(ctx echo.Context) error {
+	var params oas.PetRequestBody
+	if err := ctx.Bind(&params); err != nil {
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
+	}
+	err := h.UsecaseReceiver.CreatePets(ctx, params)
+	if err != nil {
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
+	}
+	return ctx.JSON(http.StatusCreated, nil)
+}
+
+// (PUT /pets/{id})
+func (h *PetHandler) UpdatePet(ctx echo.Context, id uint) error {
+	var params oas.PetRequestBody
+	if err := ctx.Bind(&params); err != nil {
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
+	}
+	err := h.UsecaseReceiver.UpdatePet(ctx, id, params)
+	if err != nil {
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
+	}
+	return ctx.JSON(http.StatusOK, nil)
+}
+
+// (DELETE /pets/{id})
+func (h *PetHandler) DeletePet(ctx echo.Context, id uint) error {
+	err := h.UsecaseReceiver.DeletePet(ctx, id)
+	if err != nil {
+		return ctx.JSON(http.StatusBadRequest,
+			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
+		)
+	}
+	return ctx.JSON(http.StatusNoContent, nil)
 }

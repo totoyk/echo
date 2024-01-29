@@ -26,3 +26,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Pet'
+    PetRequestBody:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        tag:
+          type: string
+      example:
+        name: doggie
+        tag: dog

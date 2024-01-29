@@ -16,7 +16,19 @@ type Pet struct {
 	Tag  *string `json:"tag,omitempty"`
 }
 
+// PetRequestBody defines model for PetRequestBody.
+type PetRequestBody struct {
+	Name string  `json:"name"`
+	Tag  *string `json:"tag,omitempty"`
+}
+
 // Pets defines model for Pets.
 type Pets struct {
 	Pets []Pet `json:"pets"`
 }
+
+// CreatePetsJSONRequestBody defines body for CreatePets for application/json ContentType.
+type CreatePetsJSONRequestBody = PetRequestBody
+
+// UpdatePetJSONRequestBody defines body for UpdatePet for application/json ContentType.
+type UpdatePetJSONRequestBody = PetRequestBody
