@@ -53,8 +53,9 @@ func (i *PetInteractor) FindPetById(ctx echo.Context, id uint) (*model.Pet, erro
 
 func (i *PetInteractor) CreatePets(ctx echo.Context, params oas.PetRequestBody) error {
 	pet := model.Pet{
-		Name: params.Name,
-		Tag:  pkg.NullString(params.Tag),
+		Name:        params.Name,
+		Tag:         pkg.NullString(params.Tag),
+		DateOfBirth: pkg.NullTime(params.DateOfBirth),
 	}
 	err := i.petRepository.Create(&pet)
 	if err != nil {
@@ -70,6 +71,7 @@ func (i *PetInteractor) UpdatePet(ctx echo.Context, id uint, params oas.PetReque
 	}
 	pet.Name = params.Name
 	pet.Tag = pkg.NullString(params.Tag)
+	pet.DateOfBirth = pkg.NullTime(params.DateOfBirth)
 	err = i.petRepository.Update(&pet)
 	if err != nil {
 		return err

@@ -8,6 +8,7 @@ import (
 
 type Pet struct {
 	gorm.Model
-	Name string
-	Tag  sql.NullString
+	Name        string
+	Tag         sql.NullString
+	DateOfBirth sql.NullTime
 }

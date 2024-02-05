@@ -1,6 +1,8 @@
 package response
 
 import (
+	"time"
+
 	"github.com/totoyk/trial-api-golang/internal/domain/model"
 	"github.com/totoyk/trial-api-golang/internal/oas"
 )
@@ -12,6 +14,12 @@ func NewPet(m *model.Pet) oas.Pet {
 		Tag: func() *string {
 			if m.Tag.Valid {
 				return &m.Tag.String
+			}
+			return nil
+		}(),
+		DateOfBirth: func() *time.Time {
+			if m.DateOfBirth.Valid {
+				return &m.DateOfBirth.Time
 			}
 			return nil
 		}(),

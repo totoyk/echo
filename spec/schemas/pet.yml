@@ -13,10 +13,14 @@ components:
           type: string
         tag:
           type: string
+        date_of_birth:
+          type: string
+          format: date-time
       example:
         id: 123
         name: doggie
         tag: dog
+        date_of_birth: 2020-01-31T23:59:59+09:00
     Pets:
       type: object
       required:
@@ -35,6 +39,10 @@ components:
           type: string
         tag:
           type: string
+        date_of_birth:
+          type: string
+          format: date-time
       example:
         name: doggie
         tag: dog
+        date_of_birth: 2020-01-31T23:59:59+09:00
