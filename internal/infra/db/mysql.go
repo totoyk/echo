@@ -14,7 +14,6 @@ type Database struct {
 	UserName string
 	Password string
 	DBName   string
-	DBLoc    string
 }
 
 func DBConfig() *Database {
@@ -26,7 +25,6 @@ func DBConfig() *Database {
 	c.UserName = conf.DBUser
 	c.Password = conf.DBPass
 	c.DBName = conf.DBName
-	c.DBLoc = conf.DBLoc
 
 	return c
 }
@@ -34,9 +32,14 @@ func DBConfig() *Database {
 func MySQL() (*gorm.DB, error) {
 	c := DBConfig()
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", c.UserName, c.Password, c.Host, c.Port, c.DBName)
-	dsn += fmt.Sprintf("?charset=utf8mb4&parseTime=true&loc=%s", c.DBLoc)
-
+	dsn := fmt.Sprintf(
+		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=true",
+		c.UserName,
+		c.Password,
+		c.Host,
+		c.Port,
+		c.DBName,
+	)
 	dbconn, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
