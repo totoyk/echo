@@ -3,11 +3,13 @@ package response
 import (
 	"time"
 
+	"github.com/labstack/echo/v4"
 	"github.com/totoyk/trial-api-golang/internal/domain/model"
 	"github.com/totoyk/trial-api-golang/internal/oas"
+	"github.com/totoyk/trial-api-golang/internal/pkg"
 )
 
-func NewPet(m *model.Pet) oas.Pet {
+func NewPet(ctx echo.Context, m *model.Pet) oas.Pet {
 	return oas.Pet{
 		Id:   m.ID,
 		Name: m.Name,
@@ -19,17 +21,18 @@ func NewPet(m *model.Pet) oas.Pet {
 		}(),
 		DateOfBirth: func() *time.Time {
 			if m.DateOfBirth.Valid {
-				return &m.DateOfBirth.Time
+				// TODO: use ctx to get the timezone
+				return pkg.SetLocation(&m.DateOfBirth.Time, "Asia/Tokyo")
 			}
 			return nil
 		}(),
 	}
 }
 
-func NewPets(ms *[]model.Pet) []oas.Pet {
+func NewPets(ctx echo.Context, ms *[]model.Pet) []oas.Pet {
 	var pets []oas.Pet
 	for _, m := range *ms {
-		pets = append(pets, NewPet(&m))
+		pets = append(pets, NewPet(ctx, &m))
 	}
 	return pets
 }

@@ -27,7 +27,7 @@ func (h *PetHandler) ListPets(ctx echo.Context) error {
 			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
 		)
 	}
-	res := response.NewPets(result)
+	res := response.NewPets(ctx, result)
 	return ctx.JSON(http.StatusOK, res)
 }
 
@@ -39,7 +39,7 @@ func (h *PetHandler) FindPetById(ctx echo.Context, id uint) error {
 			oas.Error{Code: http.StatusBadRequest, Message: err.Error()},
 		)
 	}
-	res := response.NewPet(result)
+	res := response.NewPet(ctx, result)
 	return ctx.JSON(http.StatusOK, res)
 }
 
