@@ -25,8 +25,15 @@ oapi-codegenを利用してopenapi.yamlからappのRouterとStructを生成す�
 ### oapigen
 外部参照しているspec/openapi.yamlを.distに統合するためのコンテナ。
 
-## Roadmap
-- ORMはほんとにGorm一択なのか
-- テストコードってコレいるのか（一般論ではなく）
-- ログってどうするのがよいのか
-- その他いろいろ
+## Development
+
+### Run
+```bash
+docker-compose up
+```
+
+### Coding Step
+1. spec/openapi.yamlを編集する
+2. `docker-compose up codegen`でRouterとStructを生成する
+3. internal/*を作成、編集する
+4. `docker-compose up`でAPIサーバを起動する
