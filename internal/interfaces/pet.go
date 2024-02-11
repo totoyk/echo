@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/totoyk/trial-api-golang/internal/interfaces/oas"
 	"github.com/totoyk/trial-api-golang/internal/interfaces/response"
-	"github.com/totoyk/trial-api-golang/internal/oas"
 	"github.com/totoyk/trial-api-golang/internal/usecase"
 )
 

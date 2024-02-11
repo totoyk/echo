@@ -5,7 +5,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/totoyk/trial-api-golang/internal/infra/db"
 	"github.com/totoyk/trial-api-golang/internal/interfaces"
-	"github.com/totoyk/trial-api-golang/internal/oas"
+	"github.com/totoyk/trial-api-golang/internal/interfaces/oas"
 )
 
 func Run() error {

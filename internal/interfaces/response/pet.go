@@ -5,8 +5,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/totoyk/trial-api-golang/internal/domain/model"
-	"github.com/totoyk/trial-api-golang/internal/oas"
-	"github.com/totoyk/trial-api-golang/internal/pkg"
+	"github.com/totoyk/trial-api-golang/internal/interfaces/oas"
+	"github.com/totoyk/trial-api-golang/internal/util"
 )
 
 func NewPet(ctx echo.Context, m *model.Pet) oas.Pet {
@@ -22,7 +22,7 @@ func NewPet(ctx echo.Context, m *model.Pet) oas.Pet {
 		DateOfBirth: func() *time.Time {
 			if m.DateOfBirth.Valid {
 				// TODO: use ctx to get the timezone
-				return pkg.SetLocation(&m.DateOfBirth.Time, "Asia/Tokyo")
+				return util.SetLocation(&m.DateOfBirth.Time, "Asia/Tokyo")
 			}
 			return nil
 		}(),
