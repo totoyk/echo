@@ -1,4 +1,4 @@
-module github.com/totoyk/sample-backendapp-golang-on-echo
+module github.com/totoyk/echo
 
 go 1.22
 

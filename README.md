@@ -1,4 +1,4 @@
-# sample-backendapp-golang-on-echo
+# sample echo webapp
 
 ## Overview
 

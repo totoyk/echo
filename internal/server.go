@@ -3,9 +3,9 @@ package internal
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/infra/db"
-	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/interfaces"
-	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/interfaces/oas"
+	"github.com/totoyk/echo/internal/infra/db"
+	"github.com/totoyk/echo/internal/interfaces"
+	"github.com/totoyk/echo/internal/interfaces/oas"
 )
 
 func Run() error {

@@ -2,9 +2,9 @@ package response
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/domain/model"
-	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/interfaces/oas"
-	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/util/typecast"
+	"github.com/totoyk/echo/internal/domain/model"
+	"github.com/totoyk/echo/internal/interfaces/oas"
+	"github.com/totoyk/echo/internal/util/typecast"
 )
 
 func NewPet(ctx echo.Context, m *model.Pet) oas.Pet {
