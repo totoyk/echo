@@ -2,10 +2,10 @@ package usecase
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/totoyk/trial-api-golang/internal/domain/model"
-	"github.com/totoyk/trial-api-golang/internal/domain/repository"
-	"github.com/totoyk/trial-api-golang/internal/interfaces/oas"
-	"github.com/totoyk/trial-api-golang/internal/util"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/domain/model"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/domain/repository"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/interfaces/oas"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/util/typecast"
 )
 
 type PetReceiver interface {
@@ -54,8 +54,8 @@ func (i *PetInteractor) FindPetById(ctx echo.Context, id uint) (*model.Pet, erro
 func (i *PetInteractor) CreatePets(ctx echo.Context, params oas.PetRequestBody) error {
 	pet := model.Pet{
 		Name:        params.Name,
-		Tag:         util.NullString(params.Tag),
-		DateOfBirth: util.NullTime(params.DateOfBirth),
+		Tag:         typecast.NullString(params.Tag),
+		DateOfBirth: typecast.NullTime(params.DateOfBirth),
 	}
 	err := i.petRepository.Create(&pet)
 	if err != nil {
@@ -70,8 +70,8 @@ func (i *PetInteractor) UpdatePet(ctx echo.Context, id uint, params oas.PetReque
 		return err
 	}
 	pet.Name = params.Name
-	pet.Tag = util.NullString(params.Tag)
-	pet.DateOfBirth = util.NullTime(params.DateOfBirth)
+	pet.Tag = typecast.NullString(params.Tag)
+	pet.DateOfBirth = typecast.NullTime(params.DateOfBirth)
 	err = i.petRepository.Update(&pet)
 	if err != nil {
 		return err

@@ -1,8 +1,8 @@
 package interfaces
 
 import (
-	"github.com/totoyk/trial-api-golang/internal/domain/repository"
-	"github.com/totoyk/trial-api-golang/internal/usecase"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/domain/repository"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/usecase"
 	"gorm.io/gorm"
 )
 

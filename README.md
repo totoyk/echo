@@ -1,4 +1,4 @@
-# trial-api-golang
+# sample-backendapp-golang-on-echo
 
 ## Overview
 

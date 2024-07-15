@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	server "github.com/totoyk/trial-api-golang/internal"
+	server "github.com/totoyk/sample-backendapp-golang-on-echo/internal"
 )
 
 func main() {

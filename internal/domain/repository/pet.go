@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/totoyk/trial-api-golang/internal/domain/model"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/domain/model"
 	"gorm.io/gorm"
 )
 

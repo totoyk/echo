@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/totoyk/trial-api-golang/config"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/config"
 	"gorm.io/gorm"
 )
 

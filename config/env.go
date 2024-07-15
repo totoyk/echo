@@ -10,6 +10,7 @@ type Env struct {
 	DBUser string `env:"DB_USER,required" envDefault:"root"`
 	DBPass string `env:"DB_PASS,required" envDefault:""`
 	DBName string `env:"DB_NAME,required" envDefault:"prototype"`
+	TZ     string `env:"TZ" envDefault:"Asia/Tokyo"`
 }
 
 func LoadEnv() (*Env, error) {

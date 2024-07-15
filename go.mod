@@ -1,6 +1,6 @@
-module github.com/totoyk/trial-api-golang
+module github.com/totoyk/sample-backendapp-golang-on-echo
 
-go 1.21.1
+go 1.22
 
 require (
 	github.com/caarlos0/env/v10 v10.0.0

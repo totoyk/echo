@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/totoyk/trial-api-golang/internal/interfaces/oas"
-	"github.com/totoyk/trial-api-golang/internal/interfaces/response"
-	"github.com/totoyk/trial-api-golang/internal/usecase"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/interfaces/oas"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/interfaces/response"
+	"github.com/totoyk/sample-backendapp-golang-on-echo/internal/usecase"
 )
 
 type PetHandler struct {
